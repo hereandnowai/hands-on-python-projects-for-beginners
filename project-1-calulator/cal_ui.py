@@ -1,3 +1,4 @@
+from calculator import calculate
 import gradio as gr
 import json
 import os
@@ -8,19 +9,10 @@ branding_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'b
 with open(branding_path) as f:
     brand_data = json.load(f)["brand"]
 
-def calculate(num1, op, num2):
-    if op == "+": return num1 + num2
-    elif op == "-": return num1 - num2
-    elif op == "*": return num1 * num2
-    elif op == "/":
-        if num2 == 0:
-            return "Error: Division by zero"
-        return num1 / num2
-
 gr.Interface(
     fn=calculate,
-    inputs=["number", gr.Radio(["+", "-", "*", "/"]), "number"],
-    outputs="text",
+    inputs=[gr.Number(label="First Number"), gr.Radio(["+", "-", "*", "/"], label="Operation"), gr.Number(label="Second Number")],
+    outputs=gr.Textbox(label="Result"),
     title=brand_data["organizationShortName"],
     description=brand_data["slogan"],
     theme=gr.themes.Soft()
