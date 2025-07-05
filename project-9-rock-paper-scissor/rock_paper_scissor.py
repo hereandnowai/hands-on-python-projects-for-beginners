@@ -4,43 +4,51 @@ ROCK = 'rock'
 PAPER = 'paper'
 SCISSOR = 'scissor'
 choices = [ROCK, PAPER, SCISSOR]
-positive = [[PAPER, ROCK], [SCISSOR, PAPER], [ROCK, SCISSOR]]
-negative = [[ROCK, PAPER], [PAPER, SCISSOR], [SCISSOR, ROCK]]
+
+# Define winning and losing conditions more explicitly
+winning_conditions = {
+    ROCK: SCISSOR,
+    PAPER: ROCK,
+    SCISSOR: PAPER
+}
 
 def get_computer_move():
     return random.choice(choices)
 
-def find_winner(user_move, computer_move):
-    if [user_move, computer_move] in positive:
-        return 1
-    elif [user_move, computer_move] in negative:
-        return -1
-    return 0
+def play_round(user_move_str):
+    user_move = user_move_str.lower()
+    if user_move not in choices:
+        return "Invalid move. Please choose Rock, Paper, or Scissor."
 
-print("===== Welcome to Rock, Paper And Scissor Game =====")
-while True:
-    choice = input("Do you wanna play (y/n): ").strip().lower()
-    if choice == 'y':
-        computer_move = get_computer_move()
-        while True:
-            move = input("Select a move ('r' for rock/'p' for paper/'s' for scissor): ").strip().lower()
-            if move in ['r', 'p', 's']:
-                user_move = {'r': ROCK, 'p': PAPER, 's': SCISSOR}[move]
-                print(f"User Move: {user_move}")
-                print(f"Computer's Move: {computer_move}")
-                output = find_winner(user_move, computer_move)
-                if output == 1:
-                    print("User Won !!!")
-                elif output == -1:
-                    print("Computer Won !!!")
-                else:
-                    print("It's a Tie !!!")
-                break
-            else:
-                print("Invalid input...please try again")
-    elif choice == 'n':
-        print("Exiting... Thanks for playing!")
-        break
+    computer_move = get_computer_move()
+
+    result_message = f"You chose: {user_move.capitalize()}\nComputer chose: {computer_move.capitalize()}\n"
+
+    if user_move == computer_move:
+        result_message += "It's a Tie !!!"
+    elif winning_conditions[user_move] == computer_move:
+        result_message += "You Won !!!"
     else:
-        print("Invalid input...please try again")
-    print()
+        result_message += "Computer Won !!!"
+    
+    return result_message
+
+# --- Command-line Interface (for direct execution) ---
+if __name__ == "__main__":
+    print("===== Welcome to Rock, Paper And Scissor Game =====")
+    while True:
+        choice = input("Do you wanna play (y/n): ").strip().lower()
+        if choice == 'y':
+            while True:
+                move = input("Select a move (rock/paper/scissor): ").strip().lower()
+                if move in choices:
+                    print(play_round(move))
+                    break
+                else:
+                    print("Invalid input...please try again")
+        elif choice == 'n':
+            print("Exiting... Thanks for playing!")
+            break
+        else:
+            print("Invalid input...please try again")
+        print()

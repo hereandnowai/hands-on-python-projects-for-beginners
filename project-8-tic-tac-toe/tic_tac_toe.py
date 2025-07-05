@@ -1,75 +1,98 @@
 board = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
 X = 'X'
 O = 'O'
+current_player = X
+game_over = False
 
-def displayBoard():
-    print(f" {board[0][0]} | {board[0][1]} | {board[0][2]}")
-    print(" ----------")
-    print(f" {board[1][0]} | {board[1][1]} | {board[1][2]}")
-    print(" ----------")
-    print(f" {board[2][0]} | {board[2][1]} | {board[2][2]}")
+def get_board_display():
+    display = ""
+    display += f" {board[0][0]} | {board[0][1]} | {board[0][2]}\n"
+    display += "-----------\n"
+    display += f" {board[1][0]} | {board[1][1]} | {board[1][2]}\n"
+    display += "-----------\n"
+    display += f" {board[2][0]} | {board[2][1]} | {board[2][2]}\n"
+    return display
 
-def updateBoard(character, position):
+def reset_game():
+    global board, current_player, game_over
+    board = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+    current_player = X
+    game_over = False
+    return get_board_display(), "Player X's turn."
+
+def update_board_state(character, position):
     row = (position-1)//3
     column = (position-1)%3
     board[row][column] = character
 
-def check_win():
+def check_win_condition():
+    # Check rows
     for i in range(3):
         if board[i][0] == board[i][1] == board[i][2]:
-            return 1
-        elif board[0][i] == board[1][i] == board[2][i]:
-            return 1
-    
+            return True
+    # Check columns
+    for i in range(3):
+        if board[0][i] == board[1][i] == board[2][i]:
+            return True
+    # Check diagonals
+    if board[0][0] == board[1][1] == board[2][2]:
+        return True
     if board[0][2] == board[1][1] == board[2][0]:
-        return 1
-    elif board[0][0] == board[1][1] == board[2][2]:
-        return 1
-    return 0
+        return True
+    return False
 
-def check_position(position):
+def check_draw_condition():
+    for row in board:
+        for cell in row:
+            if cell != X and cell != O:
+                return False
+    return True
+
+def play_move(position):
+    global current_player, game_over
+
+    if game_over:
+        return get_board_display(), "Game over! Click 'Reset Game' to play again."
+
     row = (position-1)//3
     column = (position-1)%3
-    if board[row][column] == X or board[row][column] == O:
-        return 0
-    return 1
 
-print("===== Welcome to Tic Tac Toe Game =====")
-counter = 0
-while 1:
-    if counter % 2 == 0:
-        displayBoard()
-        while 1:
-            choice = int(input(f"Player {(counter%2)+1}, enter your position ('{X}'): "))
-            if choice < 1 or choice > 9:
-                print('Invalid input...please try again.')
-            if check_position(choice):
-                updateBoard(X, choice)
-                if check_win():
-                    print(f"Conguratulations !!! Player {(counter%2)+1} won !!!")
-                    exit(0)
-                else:
-                    counter += 1
-                    break
-            else:
-                print(f"Position {choice} is already occupied. Choose another position.")
-        if counter == 9:
-            print("The match ended with a draw !!! Better luck next time")
-            exit(0)
+    if board[row][column] == X or board[row][column] == O:
+        return get_board_display(), "Position already occupied. Choose another."
+
+    update_board_state(current_player, position)
+
+    if check_win_condition():
+        game_over = True
+        return get_board_display(), f"Player {current_player} wins!"
+    elif check_draw_condition():
+        game_over = True
+        return get_board_display(), "It's a draw!"
     else:
-        displayBoard()
-        while 1:
-            choice = int(input(f"Player {(counter%2)+1}, enter your position ('{O}'): "))
+        current_player = O if current_player == X else X
+        return get_board_display(), f"Player {current_player}'s turn."
+
+
+# --- Command-line Interface (for direct execution) ---
+if __name__ == "__main__":
+    print("===== Welcome to Tic Tac Toe Game =====")
+    reset_game()
+    while not game_over:
+        board_display, message = get_board_display(), f"Player {current_player}'s turn."
+        print(board_display)
+        print(message)
+        try:
+            choice = int(input(f"Player {current_player}, enter your position: "))
             if choice < 1 or choice > 9:
-                print('Invalid input...please try again.')
-            if check_position(choice):
-                updateBoard(O, choice)
-                if check_win():
-                    print(f"Conguratulations !!! Player {(counter%2)+1} won !!!")
-                    exit(0)
-                else:
-                    counter += 1
-                    break
-            else:
-                print(f"Position {choice} is already occupied. Choose another position.")
-    print()
+                print("Invalid input...please try again.")
+                continue
+            
+            board_display, message = play_move(choice)
+            print(message)
+            if game_over:
+                print(board_display)
+                break
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
