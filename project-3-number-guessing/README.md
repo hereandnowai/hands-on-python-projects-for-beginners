@@ -16,31 +16,32 @@ To make our game unpredictable, we need to generate a random number. Python's bu
     import random
     ```
 
-#### 2. Defining Functions: Creating Reusable Code
-A function is a named, reusable block of code that performs a specific action. We use the `def` keyword to create one.
+#### 2. Global Variables: Game State
+To keep track of the secret number across multiple guesses, we use **global variables**. These variables are defined outside of any function and can be accessed and modified from anywhere in the file.
 
-*   **`get_random_number()`**: This function generates the secret number the user needs to guess.
-    *   **In the code:**
-        ```python
-        def get_random_number():
-            return random.randint(0, 9)
-        ```
-        *   **`random.randint(0, 9)`**: Returns a random integer between 0 and 9 (inclusive).
+*   **`secret_number`**: The random number the user needs to guess.
+*   **In the code:**
+    ```python
+    secret_number = random.randint(0, 9)
+    ```
 
-*   **`check_guess(user_guess, secret_number)`**: This function compares the user's guess to the secret number and provides feedback.
-    *   **In the code:**
-        ```python
-        def check_guess(user_guess, secret_number):
-            if user_guess == secret_number:
-                return "Correct! You win!", True
-            elif user_guess < secret_number:
-                return "Too low!", False
-            else:
-                return "Too high!", False
-        ```
-    *   It returns two values: a `message` (feedback to the user) and a `boolean` (`True` if the game is over, `False` otherwise).
+#### 3. The `make_guess()` Function: All Game Logic in One Place
+This single function handles everything related to a user's guess: comparing it to the secret number, providing feedback, and resetting the game if the guess is correct.
 
-#### 3. The Main Execution Block: `if __name__ == "__main__":`
+*   **In the code:**
+    ```python
+    def make_guess(user_guess):
+        global secret_number # Tells Python we want to modify the global secret_number
+        if user_guess == secret_number:
+            secret_number = random.randint(0, 9) # Reset for new game
+            return "Correct! You win! Starting a new game..."
+        return "Too low!" if user_guess < secret_number else "Too high!"
+    ```
+    *   **`global secret_number`**: This crucial line tells Python that when we refer to `secret_number` inside this function, we mean the global variable, not a new local one.
+    *   **Conditional Logic**: Uses `if`, `elif`, and `else` to check if the guess is correct, too low, or too high.
+    *   **Game Reset**: If the guess is correct, a new `secret_number` is generated, effectively starting a new game.
+
+#### 4. The Main Execution Block: `if __name__ == "__main__":`
 This is a special, standard Python construct. The code inside this block only runs when you execute the file directly from the terminal. It won't run if this file is imported into another file (like our UI file does!).
 
 *   **In the code:**
@@ -48,17 +49,6 @@ This is a special, standard Python construct. The code inside this block only ru
     if __name__ == "__main__":
         # All the code indented below here runs at the start.
     ```
-
-#### 4. Loops: Repeating Actions with `while`
-A `while` loop will repeat the code inside it as long as its condition is `True`.
-
-*   **In the code:**
-    ```python
-    while True:
-        # ... code to ask for input and check guess ...
-    ```
-    *   **`while True:`**: This creates an infinite loop. We need a way to get out!
-    *   **`break`**: The `break` keyword immediately exits the current loop. We use it to stop the game when the user guesses correctly.
 
 #### 5. User Interaction: `print()`, `input()`, and Data Types
 *   **`print()`**: Displays text or variables to the user in the console.
@@ -77,46 +67,24 @@ Importing allows us to use functions and tools from other files or from external
 *   **In the code:**
     ```python
     import gradio as gr
-    from number_guessing import get_random_number, check_guess
+    from number_guessing import make_guess
     ```
-    *   **`from number_guessing import get_random_number, check_guess`**: This imports our game logic functions from `number_guessing.py`.
+    *   **`from number_guessing import make_guess`**: This imports our single game logic function from `number_guessing.py`.
     *   **`import gradio as gr`**: This imports the `gradio` library, giving it the alias `gr`.
 
-#### 2. Game State Management
-For a UI, we need to keep track of the `secret_number` and `chances` across different user interactions. We use global variables for simplicity in this beginner example.
-
-*   **In the code:**
-    ```python
-    secret_number = get_random_number()
-    chances = 0
-    ```
-
-#### 3. The UI Function (`guess_number_ui`)
-This function is called by Gradio whenever the user makes a guess. It updates the game state and returns the feedback message.
-
-*   **In the code:**
-    ```python
-    def guess_number_ui(user_guess):
-        global secret_number, chances
-        chances += 1
-        message, game_over = check_guess(user_guess, secret_number)
-        # ... logic to reset game if over ...
-        return final_message_or_feedback
-    ```
-
-#### 4. Creating the Interface with Gradio
+#### 2. Creating the Interface with Gradio
 The `gr.Interface` is the main object that creates our web UI. We configure it by telling it what function to use and what the inputs and outputs should look like.
 
 *   **In the code:**
     ```python
     gr.Interface(
-        fn=guess_number_ui,
+        fn=make_guess,
         inputs=gr.Number(label="Enter your guess (0-9)"),
         outputs="text",
         title="Simple Number Guessing Game"
     ).launch()
     ```
-    *   **`fn=guess_number_ui`**: Tells Gradio to call our `guess_number_ui` function when the user submits a guess.
+    *   **`fn=make_guess`**: Tells Gradio to call our `make_guess` function directly when the user submits a guess. All the game logic and state management happens within `make_guess`.
     *   **`inputs=gr.Number(...)`**: Defines the input field for the user's guess.
     *   **`outputs="text"`**: Defines the output field where feedback is displayed.
     *   **`.launch()`**: This starts the local web server and makes your game UI available in your browser.
