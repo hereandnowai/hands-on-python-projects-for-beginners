@@ -8,7 +8,7 @@ def calculate(num1, op, num2):
         return num1 / num2
 
 if __name__ == "__main__":
-    print("===== Welcome to The HERE AND NOW Calculator App =====\n")
+    print("===== Welcome to HERE AND NOW AI's Calculator App =====\n")
     while True:
         print("Operators: +, -, *, / or exit")
         op = input("Enter an operator: ")
@@ -25,4 +25,3 @@ if __name__ == "__main__":
 
         result = calculate(num1, op, num2)
         print(f"Output: {result}")
-
