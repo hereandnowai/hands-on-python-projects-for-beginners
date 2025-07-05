@@ -39,24 +39,26 @@ def check_password_strength(password):
     elif strength == 5:
         remarks = "Now that's one hell of a strong password !!! Hackers don't have a chance guessing that password."
 
-    print("Your password has:-")
-    print(f"{lower_alpha_count} lowercase letters")
-    print(f"{upper_alpha_count} uppercase letters")
-    print(f"{number_count} digits")
-    print(f'{whitespace_count} whitespaces')
-    print(f"{special_char_count} special characters")
-    print(f"Password score: {strength}/5")
-    print(f"Remarks: {remarks}")
+    result = "Your password has:-\n"
+    result += f"{lower_alpha_count} lowercase letters\n"
+    result += f"{upper_alpha_count} uppercase letters\n"
+    result += f"{number_count} digits\n"
+    result += f'{whitespace_count} whitespaces\n'
+    result += f"{special_char_count} special characters\n"
+    result += f"Password score: {strength}/5\n"
+    result += f"Remarks: {remarks}"
+    return result
 
-print("===== Welcome to Password Strength Checker =====")
-while 1:
-    choice = input("Do you want to check a password's strength (y/n) : ")
-    if 'y' in choice.lower():
-        password = getpass.getpass("Enter the password: ")
-        check_password_strength(password)
-    elif 'n' in choice.lower():
-        print('Exiting...')
-        break
-    else:
-        print('Invalid input...please try again.')
-    print()
+if __name__ == "__main__":
+    print("===== Welcome to Password Strength Checker =====")
+    while True:
+        choice = input("Do you want to check a password's strength (y/n) : ")
+        if 'y' in choice.lower():
+            password = getpass.getpass("Enter the password: ")
+            print(check_password_strength(password))
+        elif 'n' in choice.lower():
+            print('Exiting...')
+            break
+        else:
+            print('Invalid input...please try again.')
+        print()
