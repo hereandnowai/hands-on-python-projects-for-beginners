@@ -10,6 +10,29 @@ This GitHub repository, proudly presented by **HERE AND NOW AI - Artificial Inte
 
 This repository serves as a practical guide for aspiring Python developers. Beyond just providing code, it demonstrates how to build functional applications and enhance them with modern web-based UIs, making the learning process more engaging and visually rewarding. You can also refer to our video on YouTube on this exact topic.
 
+## Prerequisites
+
+Before you begin, ensure you have the following installed and set up:
+
+*   **VS Code**: A modern code editor.
+*   **Python**: Version 3.10 or newer.
+*   **Git**: For version control.
+*   **GitHub Account**: To fork and clone the repository.
+
+## Getting Started
+
+1.  **Set up a virtual environment:**
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    This command installs `gradio` and all other necessary packages.
+
 ## Projects
 Each project in this repository comes with:
 *   A command-line interface (CLI) version, focusing on core Python logic.

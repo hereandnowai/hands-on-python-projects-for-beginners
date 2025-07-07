@@ -1,3 +1,22 @@
+# Things to learn before beginning the project:
+## Part 1:
+- Python function: what, why, how
+- Function: colon, arguments/ parameters
+- return
+- Conditionals - if, elif, else - ends with a colon
+- indentation
+- Operators - math function
+- Print statement
+- Loop: for, while
+- Variable (how to name a variable - it cannot start with a number, space, no special characters, no default functions,)
+- Input function - how to take input from a user
+- Break & continue
+- Float, int, string
+- What is f string
+## Part 2:      
+- Import function
+- Path, Gradio & use cases.
+
 # Project-Based Python: A Beginner's Guide to Building a Calculator
 
 **Welcome!** In this lesson, we will learn the fundamentals of Python programming by building a functional calculator. We'll start with a simple command-line version and then create a beautiful web-based user interface for it. Every concept you learn will be something you immediately see and use in our project.
