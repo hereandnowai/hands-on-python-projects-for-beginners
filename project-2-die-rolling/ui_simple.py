@@ -19,8 +19,8 @@ with gr.Blocks() as demo:
     output_image = gr.Image(label="Result", height=300, width=300)
 
     def roll_and_show_image():
-        number = roll_die()
-        return display_die(number)
+        die_number = roll_die()
+        return display_die(die_number)
 
     roll_btn.click(fn=roll_and_show_image, inputs=None, outputs=output_image)
 
