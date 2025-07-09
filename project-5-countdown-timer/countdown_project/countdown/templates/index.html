@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Countdown Timer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .countdown-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #countdown-output {
+            font-size: 3em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #007bff;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container countdown-container">
+        <h1 class="mb-4">Countdown Timer</h1>
+        <form id="countdown-form" class="mb-4">
+            <div class="mb-3">
+                <label for="seconds" class="form-label">Enter number of seconds:</label>
+                <input type="number" id="seconds" name="seconds" min="1" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Start Countdown</button>
+        </form>
+        <hr>
+        <div id="countdown-output"></div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('countdown-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const seconds = document.getElementById('seconds').value;
+            const outputDiv = document.getElementById('countdown-output');
+            outputDiv.innerHTML = '';
+
+            fetch(`/stream?seconds=${seconds}`)
+                .then(response => {
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+
+                    function read() {
+                        reader.read().then(({ done, value }) => {
+                            if (done) {
+                                return;
+                            }
+                            const chunk = decoder.decode(value, {stream: true});
+                            // Split by newline to handle multiple updates in one chunk
+                            const lines = chunk.split('\n').filter(line => line.trim() !== '');
+                            lines.forEach(line => {
+                                if (line.includes("Countdown starts now...")) {
+                                    outputDiv.innerHTML = line;
+                                } else if (line.includes("Countdown ended!")) {
+                                    outputDiv.innerHTML = line;
+                                } else {
+                                    outputDiv.innerHTML = line; // Update with the current number
+                                }
+                            });
+                            read();
+                        });
+                    }
+
+                    read();
+                });
+        });
+    </script>
+</body>
+</html>
