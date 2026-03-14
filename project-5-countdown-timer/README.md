@@ -96,7 +96,19 @@ pip install gradio
 
 ### Command-Line Interface
 
-To run the command-line version, execute `countdown_timer.py`:
+To run the command-line version, execute the following full command:
+
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-5-countdown-timer/countdown_timer.py
+```
+
+### Graphical User Interface
+
+To run the Gradio UI, execute the following full command:
+
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-5-countdown-timer/countdown_timer_ui.py
+```
 
 ```bash
 python countdown_timer.py

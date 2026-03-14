@@ -118,6 +118,12 @@ A `while` loop will repeat the code inside it as long as its condition is `True`
     print(f"Output: {result}")
     ```
 
+#### How to Run
+To run the terminal-based calculator, use the following full command:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-1-calulator/calculator.py
+```
+
 ---
 
 ## Part 2: The User Interface (`cal_ui.py`)
@@ -180,3 +186,14 @@ The `gr.Interface` is the main object that creates our web UI. We configure it b
     *   **`outputs=gr.Textbox(...)`**: Defines the output field. `gr.Textbox` creates a text area to display the result.
     *   **`title` and `description`**: Sets the text that appears at the top of the web page, which we loaded from our JSON file.
     *   **`.launch()`**: This is the final command that starts the local web server and makes your calculator UI available in your browser.
+
+#### How to Run the Interfaces
+To run the simple UI calculator:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-1-calulator/ui_simple.py
+```
+
+To run the better UI calculator:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-1-calulator/ui_better.py
+```

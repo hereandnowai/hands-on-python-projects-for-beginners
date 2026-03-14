@@ -55,6 +55,12 @@ This is a special, standard Python construct. The code inside this block only ru
 *   **`input()`**: Pauses the program, prompts the user with a message, and waits for them to type something and press Enter. It always returns the input as a string (text).
 *   **Type Casting with `int()`**: Since `input()` gives us text, we must convert it to an integer (`int()`) before we can compare it with our secret number.
 
+#### How to Run
+To run the terminal-based game, use the following full command:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-3-number-guessing/number_guessing.py
+```
+
 ---
 
 ## Part 2: The User Interface (`number_guessing_ui.py`)
@@ -88,3 +94,9 @@ The `gr.Interface` is the main object that creates our web UI. We configure it b
     *   **`inputs=gr.Number(...)`**: Defines the input field for the user's guess.
     *   **`outputs="text"`**: Defines the output field where feedback is displayed.
     *   **`.launch()`**: This starts the local web server and makes your game UI available in your browser.
+
+#### How to Run the Interface
+To run the web UI for the number guessing game:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-3-number-guessing/number_guessing_ui.py
+```

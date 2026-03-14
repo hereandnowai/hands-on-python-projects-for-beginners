@@ -206,3 +206,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# HERE AND NOW AI Specific
+social-media-content/
+branding.json
+.venv/

@@ -18,12 +18,12 @@ theme = gr.themes.Soft(
 
 def display_die(die_number):
     die_faces = {
-        1: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg',
-        2: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Dice-2-b.svg',
-        3: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Dice-3-b.svg',
-        4: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Dice-4-b.svg',
-        5: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg',
-        6: 'https://upload.wikimedia.org/wikipedia/commons/2/26/Dice-6-b.svg',
+        1: '⚀',
+        2: '⚁',
+        3: '⚂',
+        4: '⚃',
+        5: '⚄',
+        6: '⚅',
     }
     return die_faces.get(die_number)
 
@@ -35,14 +35,14 @@ with gr.Blocks(theme=theme) as demo:
         roll_btn = gr.Button("Roll the Die", variant="primary")
 
     with gr.Row():
-        die_image = gr.Image(label="Die Face", interactive=False, height=200, width=200)
+        die_display = gr.HTML("<div style='font-size: 300px; text-align: center; margin: 20px;'>🎲</div>")
 
     def roll_and_display():
         number = roll_die()
-        image_path = display_die(number)
-        return image_path
+        die_char = display_die(number)
+        return f"<div style='font-size: 300px; text-align: center; margin: 20px;'>{die_char}</div>"
 
-    roll_btn.click(fn=roll_and_display, inputs=None, outputs=die_image)
+    roll_btn.click(fn=roll_and_display, inputs=None, outputs=die_display)
 
     # Footer with social media links
     footer_html = f"<div style='text-align: center; margin-top: 20px;'>"

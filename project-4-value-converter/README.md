@@ -52,18 +52,18 @@ pip install requests gradio
 
 ### Command-Line Interface
 
-To run the command-line version, execute `value_converter.py`:
+To run the command-line version, execute the following full command:
 
 ```bash
-python value_converter.py
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-4-value-converter/value_converter.py
 ```
 
 ### Graphical User Interface
 
-To run the Gradio UI, execute `value_converter_ui.py`:
+To run the Gradio UI, execute the following full command:
 
 ```bash
-python value_converter_ui.py
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-4-value-converter/value_converter_ui.py
 ```
 
 This will launch a web server with the user interface. You can access it by opening the provided URL in your web browser.

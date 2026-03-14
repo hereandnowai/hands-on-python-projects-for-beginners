@@ -57,6 +57,12 @@ This is a special, standard Python construct. The code inside this block only ru
 #### 6. Loops and User Input
 We use a `while True:` loop to keep the program running until the user decides to quit. The `input()` function prompts the user for input, and we use an `if/elif/else` block to handle their choice.
 
+#### How to Run
+To run this logic in the terminal, use the following full command:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-2-die-rolling/die_rolling.py
+```
+
 ---
 
 ## Part 2: The User Interfaces (`simple_ui.py` and `better_ui.py`)
@@ -65,18 +71,30 @@ Now we'll take our dice rolling logic and give it a user-friendly graphical inte
 
 ### `simple_ui.py` - A Basic Interface
 
-This file creates a very simple UI with a button to roll the die and an image to display the result.
+This file creates a very simple UI with a button to roll the die and a large display for the result.
 
 #### 1. Importing and Defining the UI with `gr.Blocks`
 *   **`import gradio as gr`**: Imports the Gradio library.
 *   **`from die_rolling import roll_die`**: Imports our dice rolling function.
 *   **`with gr.Blocks() as demo:`**: This creates a Gradio UI. We can add components to it inside this block.
-*   **`gr.Markdown(...)`**, **`gr.Button(...)`**, **`gr.Image(...)`**: These are Gradio components that create the text, button, and image display area in our UI.
+*   **`gr.Markdown(...)`**, **`gr.Button(...)`**, **`gr.HTML(...)`**: These are Gradio components that create the text, button, and a flexible HTML display area in our UI.
 
-#### 2. Handling Button Clicks with `.click()`
+#### 2. Using Unicode and Emojis for Display
+To ensure the die faces always look crisp and never fail to load (avoiding network errors), we use:
+*   **Unicode Symbols**: Characters like `⚀`, `⚁`, `⚂`, `⚃`, `⚄`, `⚅` (U+2680 to U+2685) are used for the actual die results.
+*   **Emojis**: The 🎲 symbol (`U+1F3B2`) is used as a placeholder before the first roll.
+*   **Massive Scaling**: We wrap these characters in a `<div>` with `font-size: 600px` to make them clearly visible on high-resolution screens.
+
+#### 3. Handling Button Clicks with `.click()`
 *   **`roll_btn.click(...)`**: This tells Gradio what to do when the `roll_btn` is clicked.
-    *   **`fn=roll_and_show_image`**: The function to call when the button is clicked.
-    *   **`outputs=output_image`**: The component to send the function's return value to.
+    *   **`fn=roll_and_show_die`**: The function to call when the button is clicked.
+    *   **`outputs=output_html`**: The component to send the formatted HTML string to.
+
+#### 4. How to Run
+To run this file, use the following full command in your terminal:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-2-die-rolling/ui_simple.py
+```
 
 ### `better_ui.py` - An Enhanced Interface
 
@@ -92,3 +110,9 @@ This UI reads information like the logo URL and slogan from the `branding.json` 
 #### 3. Launching the App
 *   **`demo.launch(...)`**: This starts the web server for the Gradio UI.
 *   **`favicon_path=brand_data["logo"]["favicon"]`**: This sets the icon that appears in the browser tab.
+
+#### 4. How to Run
+To run this file, use the following full command in your terminal:
+```bash
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-2-die-rolling/ui_better.py
+```

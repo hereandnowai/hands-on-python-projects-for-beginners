@@ -82,18 +82,18 @@ pip install gradio
 
 ### Command-Line Interface
 
-To run the command-line version, execute `rock_paper_scissor.py`:
+To run the command-line version, execute the following full command:
 
 ```bash
-python rock_paper_scissor.py
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-9-rock-paper-scissor/rock_paper_scissor.py
 ```
 
 ### Graphical User Interface
 
-To run the Gradio UI, execute `rock_paper_scissor_ui.py`:
+To run the Gradio UI, execute the following full command:
 
 ```bash
-python rock_paper_scissor_ui.py
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-9-rock-paper-scissor/rock_paper_scissor_ui.py
 ```
 
 This will launch a web server with the user interface. You can access it by opening the provided URL in your web browser.

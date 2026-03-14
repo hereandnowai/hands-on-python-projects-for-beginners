@@ -79,18 +79,18 @@ pip install gradio
 
 ### Command-Line Interface
 
-To run the command-line version, execute `hangman.py`:
+To run the command-line version, execute the following full command:
 
 ```bash
-python hangman.py
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-7-hangman/hangman.py
 ```
 
 ### Graphical User Interface
 
-To run the Gradio UI, execute `hangman_ui.py`:
+To run the Gradio UI, execute the following full command:
 
 ```bash
-python hangman_ui.py
+/Users/hnai/Desktop/hands-on-python-projects-for-beginners/.venv/bin/python3 /Users/hnai/Desktop/hands-on-python-projects-for-beginners/project-7-hangman/hangman_ui.py
 ```
 
 This will launch a web server with the user interface. You can access it by opening the provided URL in your web browser.
