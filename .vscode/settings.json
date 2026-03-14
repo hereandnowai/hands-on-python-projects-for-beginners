@@ -1,3 +1,15 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/project-1-calulator",
+        "${workspaceFolder}/project-2-die-rolling",
+        "${workspaceFolder}/project-3-number-guessing",
+        "${workspaceFolder}/project-4-value-converter",
+        "${workspaceFolder}/project-5-countdown-timer",
+        "${workspaceFolder}/project-6-password-strength-checker",
+        "${workspaceFolder}/project-7-hangman",
+        "${workspaceFolder}/project-8-tic-tac-toe",
+        "${workspaceFolder}/project-9-rock-paper-scissor",
+        "${workspaceFolder}/project-10-user-management-system"
+    ]
 }
