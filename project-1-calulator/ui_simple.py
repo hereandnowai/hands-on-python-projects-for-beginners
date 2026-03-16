@@ -1,5 +1,6 @@
-from calculator import calculate
+from calculator_else import calculate
 import gradio as gr
+from gradio.themes import Soft
 import json
 import os
 
@@ -11,9 +12,11 @@ with open(branding_path) as f:
 
 gr.Interface(
     fn=calculate,
-    inputs=[gr.Number(label="First Number"), gr.Radio(["+", "-", "*", "/"], label="Operation"), gr.Number(label="Second Number")],
+    inputs=[gr.Number(label="First Number"),
+            gr.Radio(["+", "-", "*", "/"],label="Operation"),
+            gr.Number(label="Second Number")],
     outputs=gr.Textbox(label="Result"),
     title=brand_data["organizationShortName"],
     description=brand_data["slogan"],
-    theme=gr.themes.Soft()
+    theme=Soft()
 ).launch()

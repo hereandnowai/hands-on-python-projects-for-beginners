@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    background: #0b0f1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.phone {
+    width: 320px;
+    background: black;
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.display {
+    width: 100%;
+    height: 80px;
+    color: white;
+    font-size: 60px;
+    text-align: right;
+    border: none;
+    background: transparent;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+    caret-color: transparent;
+}
+
+.display:focus {
+    outline: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.2s;
+}
+
+button:active {
+    filter: brightness(1.3);
+}
+
+.num {
+    background: #333333;
+    color: white;
+}
+
+.op {
+    background: #ff9f0a;
+    color: white;
+}
+
+.spec {
+    background: #a5a5a5;
+    color: black;
+}
+
+.zero {
+    grid-column: span 2;
+    border-radius: 40px;
+    width: 100%;
+    text-align: left;
+    padding-left: 28px;
+    justify-content: flex-start;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 4: Putting it All Together - Flowchart</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --accent-color: #3498db;
+            --box-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: var(--box-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #34495e;
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .mermaid {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Step 4: Flow of Data</h1>
+    
+    <div class="mermaid">
+        graph TD
+            A[<b>User</b><br/>Clicks buttons in Browser] -->|1. Event| B(<b>JavaScript</b><br/>script.js)
+            B -->|2. POST Fetch Request| C{{<b>Flask Server</b><br/>app.py}}
+            C -->|3. Call Function| D[<b>Python Logic</b><br/>calculator_logic.py]
+            D -->|4. Return Result| C
+            C -->|5. JSON Response| B
+            B -->|6. Update UI| E[<b>Browser Display</b><br/>Result Shown]
+
+            style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+            style B fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+            style C fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+            style D fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+            style E fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    </div>
+
+    <div class="footer">
+        Project: iPhone Style Calculator App | Python & Flask
+    </div>
+</div>
+
+<script>
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'neutral',
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        }
+    });
+</script>
+</body>
+</html>
